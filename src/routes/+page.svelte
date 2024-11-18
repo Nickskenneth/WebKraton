@@ -4,10 +4,18 @@
 	import CardBesar from '$lib/components/CardBesar.svelte';
 	import CardKecil from '$lib/components/CardKecil.svelte';
 	import HeroSection from '$lib/components/HeroSection.svelte';
-	import NavBarNl from '$lib/components/NavBarNL.svelte';
+	import NavBarL from '$lib/components/NavBarL.svelte';
+	import NavBarNL from '$lib/components/NavBarNL.svelte';
+
+	let isLoggedIn = false; // Status login pengguna
 </script>
 
-<NavBarNl />
+<!-- Navbar -->
+{#if isLoggedIn}
+	<NavBarL />
+{:else}
+	<NavBarNL />
+{/if}
 
 <!-- SECTION HERO -->
 <HeroSection />
@@ -90,102 +98,6 @@
 	</div>
 </section>
 
-
 <style>
-	/* Title Section */
-	.section-title {
-		font-size: 24px;
-		color: #004da3;
-		font-weight: bold;
-		font-family: 'Poppins', sans-serif;
-		text-align: center;
-		margin-bottom: 16px;
-	}
-
-	/* General Padding for Sections */
-	.section-padding {
-		padding: 40px 20px;
-		background-color: #f5f5f5; /* Menambahkan warna background untuk section */
-	}
-
-	/* Grid Layout for About Section */
-	.about-grid {
-		display: grid;
-		grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-		gap: 20px;
-		justify-content: center;
-		align-items: start;
-	}
-
-	/* General Card Grid */
-	.card-grid {
-		display: grid;
-		grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-		gap: 20px;
-		justify-content: center;
-		align-items: stretch; /* Agar card memiliki tinggi konsisten */
-	}
-
-	/* Full Width Background for Sections */
-	.bg-gray-100 {
-		background-color: #f5f5f5; /* Warna background konsisten */
-		width: 100%;
-	}
-
-	/* Card Style Fixes */
-	.card-grid .card {
-		background-color: white;
-		border-radius: 8px;
-		box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-		overflow: hidden;
-		display: flex;
-		flex-direction: column;
-	}
-
-	/* Responsive Design */
-	@media (max-width: 1024px) {
-		.section-title {
-			font-size: 22px;
-		}
-
-		.card-grid,
-		.about-grid {
-			grid-template-columns: repeat(2, 1fr); /* 2 kolom untuk tablet */
-		}
-
-		.section-padding {
-			padding: 30px 15px;
-		}
-	}
-
-	@media (max-width: 768px) {
-		.section-title {
-			font-size: 20px;
-		}
-
-		.card-grid,
-		.about-grid {
-			grid-template-columns: 1fr; /* 1 kolom untuk layar kecil */
-		}
-
-		.section-padding {
-			padding: 20px 10px;
-		}
-	}
-
-	@media (max-width: 430px) {
-		.section-title {
-			font-size: 18px;
-		}
-
-		.section-padding {
-			padding: 15px 8px;
-		}
-
-		.card-grid,
-		.about-grid {
-			grid-template-columns: 1fr;
-			gap: 15px;
-		}
-	}
+	/* Responsive Utility Classes Already Provided by Tailwind CSS */
 </style>

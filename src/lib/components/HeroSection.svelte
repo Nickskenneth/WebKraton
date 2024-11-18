@@ -11,9 +11,9 @@
         <div class="mt-8 text-2xl font-bold">
             Acara Mendatang
         </div>
-        <div class="mt-8 w-full max-w-screen-xl"> <!-- Ensuring the carousel takes full width -->
+        <!-- <div class="mt-8 w-full max-w-screen-xl"> 
             <CarouselComponent />
-        </div>
+        </div> -->
     </div>
 </section>
 

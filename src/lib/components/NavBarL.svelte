@@ -1,93 +1,62 @@
 <script lang="ts">
-	import { page } from '$app/stores'; // Access the current page store
-	import { get } from 'svelte/store'; // To retrieve the current page info
-  
-	// Function to check if the current URL starts with the given path
-	function isActive(path: string) {
-	  const currentPath = get(page).url.pathname; // Get the current path from the page store
-	  return currentPath.startsWith(path); // Check if the current path starts with the given path
+	let showMenu = false;
+
+	function toggleNavbar() {
+		showMenu = !showMenu;
 	}
-  </script>
-  
-  <nav class="navbar">
-	<img src="/logoKraton.png" alt="logoKraton" />
-  
-	<div class="nav-links">
-	  <a href="/beranda" class:is-active={isActive('/beranda')}>Beranda</a>
-	  <a href="/situsBersejarah" class:is-active={isActive('/situsBersejarah') || isActive('/detailSitus')}>Situs</a>
-	  <a href="/acara/acaraAkanDatang" class:is-active={isActive('/acara') || isActive('/detailAcara') || isActive('/daftarAcara')}>Acara</a>
-	  <a href="/kelompok/organisasi" class:is-active={isActive('/kelompok') || isActive('/detailOrganisasi') || isActive('/detailKomunitas')}>Kelompok</a>
-	  <a href="/abdi" class:is-active={isActive('/abdi')}>Abdi</a>
+</script>
+
+<nav class="bg-blue-900 text-white p-4 relative">
+	<div class="flex justify-between items-center">
+		<!-- Logo -->
+		<img src="/logoKraton.png" alt="logoKraton" class="h-10 w-auto" />
+
+		<!-- Hamburger Menu Button (Visible on Mobile) -->
+		<div class="md:hidden" on:click={toggleNavbar}>
+			<button>
+				<svg
+					xmlns="http://www.w3.org/2000/svg"
+					fill="none"
+					viewBox="0 0 24 24"
+					stroke-width="1.5"
+					stroke="currentColor"
+					class="w-6 h-6"
+				>
+					<path
+						stroke-linecap="round"
+						stroke-linejoin="round"
+						d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"
+					/>
+				</svg>
+			</button>
+		</div>
+
+		<!-- Navigation Links (Hidden on Mobile) -->
+		<div class="hidden md:flex space-x-6">
+			<a href="/beranda" class="hover:text-yellow-400">Beranda</a>
+			<a href="/situsBersejarah" class="hover:text-yellow-400">Situs</a>
+			<a href="/acara/acaraAkanDatang" class="hover:text-yellow-400">Acara</a>
+			<a href="/kelompok/organisasi" class="hover:text-yellow-400">Kelompok</a>
+			<a href="/abdi" class="hover:text-yellow-400">Abdi</a>
+		</div>
+
+		<!-- Profile Icon -->
+		<div class="hidden md:block">
+			<a href="/profile">
+				<img src="/iconProfile.svg" alt="Profile" class="h-10 w-10 rounded-full" />
+			</a>
+		</div>
 	</div>
-  
-	<!-- User/Profile icon -->
-	<div class="profile">
-	  <a href="/profile">
-		<img src="/iconProfile.svg" alt="Profile" class="profile-icon" />
-	  </a>
+
+	<!-- Mobile Menu -->
+	{#if showMenu}
+	<div class="absolute top-16 left-0 w-full bg-blue-900 text-white flex flex-col space-y-4 p-4 md:hidden z-50 shadow-lg">
+		<a href="/beranda" class="hover:text-yellow-400">Beranda</a>
+		<a href="/situsBersejarah" class="hover:text-yellow-400">Situs</a>
+		<a href="/acara/acaraAkanDatang" class="hover:text-yellow-400">Acara</a>
+		<a href="/kelompok/organisasi" class="hover:text-yellow-400">Kelompok</a>
+		<a href="/abdi" class="hover:text-yellow-400">Abdi</a>
+		<a href="/profile" class="hover:text-yellow-400">Profile</a>
 	</div>
-  </nav>
-  
-  <style>
-	/* Navbar container */
-	.navbar {
-	  position: relative;
-	  z-index: 10;
-	  top: 0;
-	  width: 100%;
-	  padding: 1rem;
-	  display: flex;
-	  justify-content: space-between;
-	  align-items: center;
-	  background-color: #0b2e4b; /* Dark blue background */
-	}
-  
-	/* Logo image */
-	.navbar img {
-	  height: 64px;
-	  width: 50px;
-	}
-  
-	/* Navigation links container */
-	.nav-links {
-	  display: flex;
-	  gap: 2rem; /* Gap between navigation links */
-	}
-  
-	/* Styling for each navigation link */
-	.nav-links a {
-	  color: #fff; /* White text color */
-	  text-decoration: none;
-	  font-size: 20px;
-	}
-  
-	/* Hover effect for the navigation links */
-	.nav-links a:hover {
-	  color: #f1c40f; /* Yellow color on hover */
-	}
-  
-	/* Active state styling for current navigation link */
-	.nav-links a.is-active {
-	  color: #e74c3c; /* Red color for active link */
-	}
-  
-	/* Profile icon container */
-	.profile {
-	  display: flex;
-	  align-items: center;
-	  justify-content: center;
-	  width: 50px;
-	  height: 50px;
-	  background-color: #f5f5f5; /* Light background color */
-	  border-radius: 50%; /* Circular icon background */
-	  overflow: hidden; /* Hide overflow if the image is too big */
-	}
-  
-	/* Profile image icon */
-	.profile-icon {
-	  width: 100%;
-	  height: 100%;
-	  object-fit: cover; /* Ensures the image maintains its aspect ratio */
-	}
-  </style>
-  
+	{/if}
+</nav>
