@@ -9,7 +9,7 @@
 <nav class="bg-blue-900 text-white p-4 relative">
 	<div class="flex justify-between items-center">
 		<!-- Logo -->
-		<img src="/logoKraton.png" alt="logoKraton" class="h-10 w-auto" />
+		<img src="/logoKraton.png" alt="logoKraton" class="h-16 w-auto" />
 
 		<!-- Hamburger Menu Button (Visible on Mobile) -->
 		<div class="md:hidden" on:click={toggleNavbar}>
@@ -40,7 +40,7 @@
 	<!-- Mobile Menu -->
 	{#if showMenu}
 	<div class="absolute top-16 left-0 w-full bg-blue-900 text-white flex flex-col space-y-4 p-4 md:hidden z-50 shadow-lg">
-		<a href="/loginKraton" class="hover:text-yellow-400">Masuk</a>
+		<a href="/loginKraton" class="text-xl hover:text-yellow-400">Masuk</a>
 	</div>
 	{/if}
 </nav>
