@@ -1,19 +1,23 @@
 <script>
 	export let imageSrc;
-	export let imageAlt = 'Situs Bersejarah'; // Deskripsi gambar default
+	export let imageAlt = 'Situs Bersejarah'; // Default alt text
 	export let title;
-	export let href = '/loginKraton'; // Default URL jika tidak diberikan
-	export let linkText = 'Selanjutnya →'; // Teks default untuk tautan
+	export let href = '#'; // Default URL
+	export let linkText = 'Selanjutnya →'; // Default link text
 </script>
 
-<a href={href} class="block text-decoration-none hover:scale-105 transition-transform duration-300">
-	<div class="rounded-2xl shadow-lg overflow-hidden w-[340px] h-[300px] flex flex-col">
+<a {href} class="block text-decoration-none">
+	<div
+		class="flex flex-col justify-between bg-white shadow-lg rounded-2xl overflow-hidden w-[340px] h-[300px] hover:scale-105 transition-transform duration-300"
+	>
+		<!-- Image -->
 		<img src={imageSrc} alt={imageAlt} class="w-full h-[180px] object-cover" />
-		<div class="flex flex-col justify-between px-6 py-4 bg-white flex-grow">
-			<h2 class="text-lg font-semibold text-blue-900">{title}</h2>
-			<span class="text-green-600 font-bold mt-4 self-end hover:underline">
-				{linkText}
-			</span>
+		<!-- Card Body -->
+		<div class="flex flex-col justify-between px-6 py-4 h-[120px]">
+			<!-- Title -->
+			<h2 class="text-lg font-semibold text-blue-900 mb-2">{title}</h2>
+			<!-- Link -->
+			<span class="text-green-600 font-bold hover:underline self-end">{linkText}</span>
 		</div>
 	</div>
 </a>
