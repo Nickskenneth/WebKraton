@@ -59,22 +59,21 @@
 </script>
 
 <NavBarL />
-
-<section class="situs-page">
-	<h1 class="section-title">Situs Bersejarah</h1>
+<section class="p-8 bg-gray-100">
+	<h1 class="text-3xl font-bold text-blue-600 text-center mb-8">Situs Bersejarah</h1>
 
 	<!-- Search bar -->
-	<div class="search-bar">
+	<div class="flex justify-center mb-6">
 		<input
 			type="text"
 			placeholder="Cari Situs Bersejarah..."
 			bind:value={searchTerm}
-			class="search-input"
+			class="w-full max-w-md px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring focus:ring-blue-300"
 		/>
 	</div>
 
 	<!-- Display filtered list of historical sites -->
-	<div class="grid-layout">
+	<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mx-auto max-w-screen-xl px-4">
 		{#each filteredSitusList as situs}
 			<CardBesar
 				title={situs.title}
@@ -87,53 +86,5 @@
 </section>
 
 <style>
-	.situs-page {
-		padding: 20px 40px;
-		background-color: #f5f5f5;
-	}
-
-	.section-title {
-		font-size: 36px;
-		color: #004da3;
-		font-weight: bold;
-		font-family: 'Poppins', sans-serif;
-		padding-top: 24px;
-		padding-bottom: 16px;
-		text-align: center;
-	}
-
-	/* Styling the search bar */
-	.search-bar {
-		margin: 20px 0;
-		display: flex;
-		justify-content: flex-start;
-	}
-
-	.search-input {
-		padding: 10px;
-		width: 100%;
-		max-width: 400px;
-		font-size: 16px;
-		border: 1px solid #ccc;
-		border-radius: 4px;
-	}
-
-	.grid-layout {
-		display: grid;
-		grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-		gap: 20px;
-		margin-top: 20px;
-	}
-
-	@media (max-width: 1200px) {
-		.grid-layout {
-			grid-template-columns: repeat(2, 1fr);
-		}
-	}
-
-	@media (max-width: 768px) {
-		.grid-layout {
-			grid-template-columns: 1fr;
-		}
-	}
+	/* Tidak diperlukan styling manual karena semuanya menggunakan Tailwind CSS */
 </style>
