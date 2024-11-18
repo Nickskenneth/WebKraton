@@ -9,7 +9,7 @@
 <nav class="bg-blue-900 text-white p-4 relative">
 	<div class="flex justify-between items-center">
 		<!-- Logo -->
-		<img src="/logoKraton.png" alt="logoKraton" class="h-10 w-auto" />
+		<img src="/logoKraton.png" alt="logoKraton" class="h-16 w-auto" />
 
 		<!-- Hamburger Menu Button (Visible on Mobile) -->
 		<div class="md:hidden" on:click={toggleNavbar}>
@@ -33,17 +33,17 @@
 
 		<!-- Navigation Links (Hidden on Mobile) -->
 		<div class="hidden md:flex space-x-6">
-			<a href="/beranda" class="hover:text-yellow-400">Beranda</a>
-			<a href="/situsBersejarah" class="hover:text-yellow-400">Situs</a>
-			<a href="/acara/acaraAkanDatang" class="hover:text-yellow-400">Acara</a>
-			<a href="/kelompok/organisasi" class="hover:text-yellow-400">Kelompok</a>
-			<a href="/abdi" class="hover:text-yellow-400">Abdi</a>
+			<a href="/beranda" class="text-xl hover:text-yellow-400">Beranda</a>
+			<a href="/situsBersejarah" class="text-xl hover:text-yellow-400">Situs</a>
+			<a href="/acara/acaraAkanDatang" class="text-xl hover:text-yellow-400">Acara</a>
+			<a href="/kelompok/organisasi" class="text-xl hover:text-yellow-400">Kelompok</a>
+			<a href="/abdi" class="text-xl hover:text-yellow-400">Abdi</a>
 		</div>
 
 		<!-- Profile Icon -->
 		<div class="hidden md:block">
 			<a href="/profile">
-				<img src="/iconProfile.svg" alt="Profile" class="h-10 w-10 rounded-full" />
+				<img src="/iconProfile.svg" alt="Profile" class="h-14 w-14 rounded-full" />
 			</a>
 		</div>
 	</div>
