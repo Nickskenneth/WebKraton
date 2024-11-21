@@ -5,7 +5,7 @@
 </script>
 
 <div
-    class="w-[372px] h-[440px] rounded-xl p-6 shadow-lg flex flex-col justify-start items-center"
+    class="w-[340px] h-[440px] rounded-xl p-6 shadow-lg flex flex-col justify-start items-center"
     style="background-color: {bgColor};"
 >
     <img

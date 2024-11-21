@@ -23,7 +23,7 @@
 <!-- SECTION ABOUT KERATON -->
 <section class="py-10 px-5 bg-gray-100">
 	<h2 class="text-2xl font-bold text-blue-600 text-center mb-6">Tentang Kraton Solo</h2>
-	<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+	<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mx-auto max-w-6xl">
 		<CardAbout
 			content="Keraton Surakarta Hadiningrat adalah istana resmi Kesultanan Surakarta, yang didirikan oleh Paku Buwono II pada tahun 1745..."
 			imageSrc="\KeratonSurakartaAbt.jpg"
@@ -46,13 +46,18 @@
 <section class="py-10 px-5 bg-white">
 	<div class="flex justify-between items-center mb-6">
 		<h2 class="text-2xl font-bold text-blue-600">Situs Bersejarah</h2>
-		<ButtonLihatSemua href="/situsBersejarah" label="Lihat Semua" />
+		<ButtonLihatSemua href="\loginKraton" label="Lihat Semua" />
 	</div>
 	<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-		<CardBesar title="Keraton Surakarta Hadiningrat" content="..." imageSrc="\KeratonSurakarta.jpg" />
-		<CardBesar title="Pesanggerahan Langenharjo" content="..." imageSrc="\Langenharjo.jpg" />
-		<CardBesar title="Bunker Kuno Surakarta" content="..." imageSrc="\BunkerKunoSurakarta.jpg" />
-		<CardBesar title="Umbul Tirto Mulyo" content="..." imageSrc="\UmbulTirtoMulyo.jpg" />
+		<CardBesar
+			title="Keraton Surakarta Hadiningrat"
+			content="..."
+			imageSrc="\KeratonSurakarta.jpg"
+			href="\loginKraton"
+		/>
+		<CardBesar title="Pesanggerahan Langenharjo" content="..." imageSrc="\Langenharjo.jpg" href="\loginKraton"/>
+		<CardBesar title="Bunker Kuno Surakarta" content="..." imageSrc="\BunkerKunoSurakarta.jpg" href="\loginKraton"/>
+		<CardBesar title="Umbul Tirto Mulyo" content="..." imageSrc="\UmbulTirtoMulyo.jpg" href="\loginKraton"/>
 	</div>
 </section>
 
@@ -60,13 +65,18 @@
 <section class="py-10 px-5 bg-gray-100">
 	<div class="flex justify-between items-center mb-6">
 		<h2 class="text-2xl font-bold text-blue-600">Acara</h2>
-		<ButtonLihatSemua href="/acara/acaraAkanDatang" label="Lihat Semua" />
+		<ButtonLihatSemua href="\loginKraton" label="Lihat Semua" />
 	</div>
 	<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-		<CardBesar title="Kirab Malam 1 Suro" content="..." imageSrc="\Kirab1Suro.jpg" />
-		<CardBesar title="Garebeg Pasa" content="..." imageSrc="\GarebegPasa.jpg" />
-		<CardBesar title="Tinggalan Dalem Jumenengan" content="..." imageSrc="\TinggalanDalemJumenengan.jpg" />
-		<CardBesar title="Sesaji Mahesa Lawung" content="..." imageSrc="\SesajiMahesaLawung.jpg" />
+		<CardBesar title="Kirab Malam 1 Suro" content="..." imageSrc="\Kirab1Suro.jpg" href="\loginKraton"/>
+		<CardBesar title="Garebeg Pasa" content="..." imageSrc="\GarebegPasa.jpg" href="\loginKraton"/>
+		<CardBesar
+			title="Tinggalan Dalem Jumenengan"
+			content="..."
+			imageSrc="\TinggalanDalemJumenengan.jpg"
+			href="\loginKraton"
+		/>
+		<CardBesar title="Sesaji Mahesa Lawung" content="..." imageSrc="\SesajiMahesaLawung.jpg" href="\loginKraton"/>
 	</div>
 </section>
 
@@ -74,13 +84,17 @@
 <section class="py-10 px-5 bg-white">
 	<div class="flex justify-between items-center mb-6">
 		<h2 class="text-2xl font-bold text-blue-600">Organisasi</h2>
-		<ButtonLihatSemua href="/kelompok/organisasi" label="Lihat Semua" />
+		<ButtonLihatSemua href="\loginKraton" label="Lihat Semua" />
 	</div>
 	<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-		<CardKecil title="Bregada - Prajurit Karaton Surakarta" imageSrc="\Bregada.png" />
-		<CardKecil title="Putri Narpo Wandowo" imageSrc="\PutriNarpoWandowo.jpg" />
-		<CardKecil title="Lembaga Dewan Adat Keraton Surakarta" imageSrc="\LembagaDewanAdatKeratonSurakarta.jpg" />
-		<CardKecil title="Bregada - Prajurit Karaton Surakarta" imageSrc="\Bregada.png" />
+		<CardKecil title="Bregada - Prajurit Karaton Surakarta" imageSrc="\Bregada.png" href="\loginKraton"/>
+		<CardKecil title="Putri Narpo Wandowo" imageSrc="\PutriNarpoWandowo.jpg" href="\loginKraton"/>
+		<CardKecil
+			title="Lembaga Dewan Adat Keraton Surakarta"
+			imageSrc="\LembagaDewanAdatKeratonSurakarta.jpg"
+			href="\loginKraton"
+		/>
+		<CardKecil title="Bregada - Prajurit Karaton Surakarta" imageSrc="\Bregada.png" href="\loginKraton"/>
 	</div>
 </section>
 
@@ -88,16 +102,15 @@
 <section class="py-10 px-5 bg-gray-100">
 	<div class="flex justify-between items-center mb-6">
 		<h2 class="text-2xl font-bold text-blue-600">Komunitas</h2>
-		<ButtonLihatSemua href="/kelompok/komunitas" label="Lihat Semua" />
+		<ButtonLihatSemua href="\loginKraton" label="Lihat Semua" />
 	</div>
 	<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-		<CardKecil title="Pakasa" imageSrc="\Pakasa.jpg" />
-		<CardKecil title="Sinau Batik" imageSrc="\SinauBatik.jpg" />
-		<CardKecil title="Solo Societeit" imageSrc="\SoloSocieteit.JPG" />
-		<CardKecil title="Pakasa" imageSrc="\Pakasa.jpg" />
+		<CardKecil title="Pakasa" imageSrc="\Pakasa.jpg" href="\loginKraton"/>
+		<CardKecil title="Sinau Batik" imageSrc="\SinauBatik.jpg" href="\loginKraton"/>
+		<CardKecil title="Solo Societeit" imageSrc="\SoloSocieteit.JPG" href="\loginKraton"/>
+		<CardKecil title="Pakasa" imageSrc="\Pakasa.jpg" href="\loginKraton"/>
 	</div>
 </section>
 
 <style>
-	/* Responsive Utility Classes Already Provided by Tailwind CSS */
 </style>

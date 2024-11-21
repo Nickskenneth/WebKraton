@@ -60,31 +60,32 @@
 
 <NavBarL />
 <section class="p-8 bg-gray-100">
-	<h1 class="text-3xl font-bold text-blue-600 text-center mb-8">Situs Bersejarah</h1>
+	<div class="max-w-screen-xl mx-auto">
+		<!-- Header section with title and button -->
+		<div class="flex justify-center items-center mb-6">
+			<h1 class="text-3xl font-bold text-blue-600 text-center">Situs Bersejarah</h1>
+		</div>
 
-	<!-- Search bar -->
-	<div class="flex justify-center mb-6">
-		<input
-			type="text"
-			placeholder="Cari Situs Bersejarah..."
-			bind:value={searchTerm}
-			class="w-full max-w-md px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring focus:ring-blue-300"
-		/>
-	</div>
-
-	<!-- Display filtered list of historical sites -->
-	<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mx-auto max-w-screen-xl px-4">
-		{#each filteredSitusList as situs}
-			<CardBesar
-				title={situs.title}
-				content={situs.content}
-				imageSrc={situs.imageSrc}
-				href={situs.href}
+		<!-- Search bar -->
+		<div class="flex justify-center mb-6">
+			<input
+				type="text"
+				placeholder="Cari Situs Bersejarah..."
+				bind:value={searchTerm}
+				class="w-full max-w-md px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring focus:ring-blue-300"
 			/>
-		{/each}
+		</div>
+
+		<!-- Display filtered list of historical sites -->
+		<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+			{#each filteredSitusList as situs}
+				<CardBesar
+					title={situs.title}
+					content={situs.content}
+					imageSrc={situs.imageSrc}
+					href={situs.href}
+				/>
+			{/each}
+		</div>
 	</div>
 </section>
-
-<style>
-	/* Tidak diperlukan styling manual karena semuanya menggunakan Tailwind CSS */
-</style>

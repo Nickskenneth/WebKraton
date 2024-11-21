@@ -1,98 +1,46 @@
 <script>
-	import CardBesar from '$lib/components/CardBesar.svelte'; // Import CardBesar untuk menampilkan acara
-	import NavBarL from '$lib/components/NavBarL.svelte';
+	import CardBesar from '$lib/components/CardBesar.svelte';
+
+	let acaraList = [
+		{
+			title: 'Kirab Malam 1 Suro',
+			content: 'Kirab satu Suro di Keraton Surakarta berasal...',
+			imageSrc: '/Kirab1Suro.jpg',
+			href: '/detailAcara'
+		},
+		{
+			title: 'Garebeg Pasa',
+			content: 'Garebeg Pasa adalah tradisi tahunan...',
+			imageSrc: '/GarebegPasa.jpg',
+			href: '/detailAcara'
+		},
+		{
+			title: 'Tinggalan Dalem Jumenengan',
+			content: 'Tingalan Dalem Jumenengan adalah tradisi...',
+			imageSrc: '/TinggalanDalemJumenengan.jpg',
+			href: '/detailAcara'
+		},
+		{
+			title: 'Sesaji Mahesa Lawung',
+			content: 'Sesaji Mahesa Lawung adalah tradisi dalam...',
+			imageSrc: '/SesajiMahesaLawung.jpg',
+			href: '/detailAcara'
+		}
+	];
 </script>
 
-<!-- <NavBarL /> -->
-
-<section class="acara-page">
-	<!-- <h2 class="section-title">Acara akan Datang</h2> -->
-
-	<!-- <div class="section-header">
-		<div class="filter-buttons">
-			<button class="filter-btn active">Akan Datang</button>
-			<button class="filter-btn">Selesai</button>
+<section class="bg-gray-100 py-10 px-5">
+	<div class="container mx-auto">
+		<!-- Grid Card -->
+		<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+			{#each acaraList as acara}
+				<CardBesar
+					title={acara.title}
+					content={acara.content}
+					imageSrc={acara.imageSrc}
+					href={acara.href}
+				/>
+			{/each}
 		</div>
-	</div> -->
-
-	<div class="grid-layout">
-		<CardBesar
-			title="Kirab Malam 1 Suro"
-			content="kirab satu Suro di Keraton Surakarta berasal sejak masa pemerintahan Raja Pakubuwono X yang bertahta pada periode 1893–1939. Acara kirab pusaka identik dengan penggunaan kerbau bule atau kebo bule, sehingga sering disebut dengan Kirab Kebo Bule. Pada 2023, kirab malam 1 suro Keraton Surakarta akan melewati rute Khusus dilewati sama seperti tahun-tahun sebelumnya."
-			imageSrc="\Kirab1Suro.jpg"
-			href="\detailAcara"
-		/>
-		<CardBesar
-			title="Garebeg Pasa"
-			content="Garebeg Pasa adalah tradisi tahunan di Keraton Yogyakarta dan Surakarta yang merayakan hari raya Idul Fitri dan Idul Adha. Acara ini ditandai dengan prosesi membawa gunungan berisi hasil bumi, makanan, dan barang-barang simbolis ke masjid untuk dibagikan kepada masyarakat. Garebeg Pasa mencerminkan rasa syukur atas rezeki yang diterima serta menguatkan hubungan antara keraton dan rakyat."
-			imageSrc="\GarebegPasa.jpg"
-			href="\detailAcara"
-		/>
-		<CardBesar
-			title="Tinggalan Dalem Jumenengan"
-			content="Tingalan Dalem Jumenengan adalah tradisi yang diadakan di Keraton Surakarta untuk merayakan kenaikan tahta raja baru. Acara ini meliputi serangkaian ritual dan upacara adat yang melambangkan penerimaan dan dukungan masyarakat terhadap pemimpin baru. Kegiatan ini juga menonjolkan nilai-nilai budaya dan spiritual yang kuat dalam masyarakat Jawa."
-			imageSrc="\TinggalanDalemJumenengan.jpg"
-			href="\detailAcara"
-		/>
-		<CardBesar
-			title="Sesaji Mahesa Lawung"
-			content="Sesaji Mahesa Lawung adalah tradisi dalam ritual keagamaan di Keraton Surakarta yang melibatkan persembahan berupa sesaji atau makanan kepada Dewi Sri, dewi padi dan kesuburan. Tradisi ini dilakukan untuk memohon berkah dan kesuburan hasil pertanian kepada Tuhan. Sesaji Mahesa Lawung mencerminkan hubungan erat antara masyarakat dengan alam dan budaya pertanian Jawa."
-			imageSrc="\SesajiMahesaLawung.jpg"
-			href="\detailAcara"
-		/>
-		<CardBesar
-			title="Kirab Malam 1 Suro"
-			content="kirab satu Suro di Keraton Surakarta berasal sejak masa pemerintahan Raja Pakubuwono X yang bertahta pada periode 1893–1939. Acara kirab pusaka identik dengan penggunaan kerbau bule atau kebo bule, sehingga sering disebut dengan Kirab Kebo Bule. Pada 2023, kirab malam 1 suro Keraton Surakarta akan melewati rute Khusus dilewati sama seperti tahun-tahun sebelumnya."
-			imageSrc="\Kirab1Suro.jpg"
-			href="\detailAcara"
-		/>
-		<CardBesar
-			title="Garebeg Pasa"
-			content="Garebeg Pasa adalah tradisi tahunan di Keraton Yogyakarta dan Surakarta yang merayakan hari raya Idul Fitri dan Idul Adha. Acara ini ditandai dengan prosesi membawa gunungan berisi hasil bumi, makanan, dan barang-barang simbolis ke masjid untuk dibagikan kepada masyarakat. Garebeg Pasa mencerminkan rasa syukur atas rezeki yang diterima serta menguatkan hubungan antara keraton dan rakyat."
-			imageSrc="\GarebegPasa.jpg"
-			href="\detailAcara"
-		/>
-		<CardBesar
-			title="Tinggalan Dalem Jumenengan"
-			content="Tingalan Dalem Jumenengan adalah tradisi yang diadakan di Keraton Surakarta untuk merayakan kenaikan tahta raja baru. Acara ini meliputi serangkaian ritual dan upacara adat yang melambangkan penerimaan dan dukungan masyarakat terhadap pemimpin baru. Kegiatan ini juga menonjolkan nilai-nilai budaya dan spiritual yang kuat dalam masyarakat Jawa."
-			imageSrc="\TinggalanDalemJumenengan.jpg"
-			href="\detailAcara"
-		/>
-		<CardBesar
-			title="Sesaji Mahesa Lawung"
-			content="Sesaji Mahesa Lawung adalah tradisi dalam ritual keagamaan di Keraton Surakarta yang melibatkan persembahan berupa sesaji atau makanan kepada Dewi Sri, dewi padi dan kesuburan. Tradisi ini dilakukan untuk memohon berkah dan kesuburan hasil pertanian kepada Tuhan. Sesaji Mahesa Lawung mencerminkan hubungan erat antara masyarakat dengan alam dan budaya pertanian Jawa."
-			imageSrc="\SesajiMahesaLawung.jpg"
-			href="\detailAcara"
-		/>
 	</div>
 </section>
-
-<style>
-	.acara-page {
-		padding: 20px 40px;
-		background-color: #f5f5f5;
-		max-width: 100%; /* Pastikan lebar maksimalnya 100% */
-		margin: 0 auto; /* Tengah secara horizontal */
-	}
-
-	.grid-layout {
-		display: grid;
-		grid-template-columns: repeat(4, 1fr); /* 4 card per baris */
-		gap: 20px;
-		width: 100%; /* Buat grid memenuhi lebar penuh */
-		padding-left: 10px;
-		padding-right: 10px;
-	}
-
-	@media (max-width: 1200px) {
-		.grid-layout {
-			grid-template-columns: repeat(2, 1fr);
-		}
-	}
-
-	@media (max-width: 768px) {
-		.grid-layout {
-			grid-template-columns: 1fr;
-		}
-	}
-</style>
