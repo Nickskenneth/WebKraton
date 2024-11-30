@@ -1,6 +1,6 @@
 <script>
 	export let imageSrc;
-	export let imageAlt = 'Situs Bersejarah'; // Default alt text
+	export let imageAlt = 'gambar'; // Default alt text
 	export let title;
 	export let href = '#'; // Default URL
 	export let linkText = 'Selanjutnya →'; // Default link text
