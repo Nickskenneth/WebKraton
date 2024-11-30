@@ -31,8 +31,7 @@
 			title: 'Solo Societeit',
 			imageSrc: '/SoloSocieteit.JPG',
 			href: '/detailKomunitas'
-		},
-		{
+		},{
 			title: 'Sinau Batik',
 			imageSrc: '/SinauBatik.jpg',
 			href: '/detailKomunitas'
@@ -41,7 +40,7 @@
 			title: 'Solo Societeit',
 			imageSrc: '/SoloSocieteit.JPG',
 			href: '/detailKomunitas'
-		}
+		},
 	];
 </script>
 
