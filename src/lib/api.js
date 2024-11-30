@@ -23,3 +23,57 @@ export async function getKomunitas() {
 		throw error;
 	}
 }
+
+// Fungsi untuk login
+export async function signin(username, password) {
+	try {
+		// Membuat URL dengan query params
+		const url = new URL('http://manpro.crossnet.co.id:8080/signin');
+		const params = new URLSearchParams();
+		params.append('username', username);
+		params.append('password', password);
+		url.search = params.toString(); // Menambahkan query params ke URL
+
+		// Mengirimkan request GET
+		const response = await fetch(url, {
+			method: 'GET'
+		});
+
+		// Menangani respons API
+		const data = await response.json();
+
+		if (response.ok && data.status === 'success') {
+			return { success: true, message: data.message };
+		} else {
+			return { success: false, message: data.message || 'Invalid credentials' };
+		}
+	} catch (error) {
+		// Menangani error koneksi atau lainnya
+		return { success: false, message: error.message || 'Terjadi kesalahan, coba lagi.' };
+	}
+}
+// api.js
+
+import { fetch } from 'svelte-fetch';
+
+export async function signup(username, password) {
+	try {
+		const response = await fetch('http://manpro.crossnet.co.id:8080/signup', {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json'
+			},
+			body: JSON.stringify({ username, password })
+		});
+		const data = await response.json();
+
+		if (data.success) {
+			return { success: true, message: 'Pendaftaran berhasil!' };
+		} else {
+			return { success: false, message: data.message || 'Terjadi kesalahan' };
+		}
+	} catch (error) {
+		console.error(error);
+		return { success: false, message: 'Terjadi kesalahan koneksi' };
+	}
+}
