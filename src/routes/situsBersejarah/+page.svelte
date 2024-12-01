@@ -1,64 +1,43 @@
 <script lang="ts">
 	//@ts-nocheck
+	import { onMount } from 'svelte';
+	import { getSitus } from '$lib/api'; // Mengambil fungsi dari api.js
 	import CardBesar from '$lib/components/CardBesar.svelte';
 	import NavBarL from '$lib/components/NavBarL.svelte';
 
-	// State for storing search term
+	// State untuk menyimpan data situs dan status loading
+	let situsList = [];
 	let searchTerm = '';
+	let isLoading = true;
+	let errorMessage = '';
 
-	// List of historical sites (situsList)
-	let situsList = [
-		{
-			title: 'Keraton Surakarta Hadiningrat',
-			content:
-				'Keraton Surakarta Hadiningrat didirikan oleh Paku Buwono II pada tahun 1745 di Surakarta, Jawa Tengah. Keraton ini merupakan pusat kebudayaan dan pemerintahan Kesultanan Surakarta...',
-			imageSrc: '/KeratonSurakarta.jpg',
-			href: '/detailSitus'
-		},
-		{
-			title: 'Pesanggerahan Langenharjo',
-			content:
-				'Pesanggrahan Langenharjo dibangun pada masa Pakubuwono X di akhir abad ke-19 di Sukoharjo, Jawa Tengah, sebagai tempat istirahat keluarga Keraton Surakarta...',
-			imageSrc: '/Langenharjo.jpg',
-			href: '/detailSitus'
-		},
-		{
-			title: 'Bunker Kuno Surakarta',
-			content:
-				'Berukuran 16×24 meter, bunker ini pertama kali ditemukan pada tahun 2012. Saat diteliti oleh tim arkeologi dari Yogyakarta, bunker ini diperkirakan dibangun pada tahun 1800-an...',
-			imageSrc: '/BunkerKunoSurakarta.jpg',
-			href: '/detailSitus'
-		},
-		{
-			title: 'CC Surakarta Hadiningrat',
-			content:
-				'Keraton Surakarta Hadiningrat didirikan oleh Paku Buwono II pada tahun 1745 di Surakarta, Jawa Tengah. Keraton ini merupakan pusat kebudayaan dan pemerintahan Kesultanan Surakarta...',
-			imageSrc: '/KeratonSurakarta.jpg',
-			href: '/detailSitus'
-		},
-		{
-			title: 'AA Langenharjo',
-			content:
-				'Pesanggrahan Langenharjo dibangun pada masa Pakubuwono X di akhir abad ke-19 di Sukoharjo, Jawa Tengah, sebagai tempat istirahat keluarga Keraton Surakarta...',
-			imageSrc: '/Langenharjo.jpg',
-			href: '/detailSitus'
-		},
-		{
-			title: 'BB Kuno Surakarta',
-			content:
-				'Berukuran 16×24 meter, bunker ini pertama kali ditemukan pada tahun 2012. Saat diteliti oleh tim arkeologi dari Yogyakarta, bunker ini diperkirakan dibangun pada tahun 1800-an...',
-			imageSrc: '/BunkerKunoSurakarta.jpg',
-			href: '/detailSitus'
+	// Ambil data situs dari API saat komponen dimuat
+	onMount(async () => {
+		try {
+			const data = await getSitus(); // Panggil fungsi API
+
+			// Memeriksa apakah data berhasil diambil
+			if (data.Status === 200 && Array.isArray(data.Data)) {
+				// Memetakan data situs jika valid
+				situsList = data.Data.map((situs) => ({
+					title: situs.Nama || 'Situs Tanpa Nama', // NamaSitus atau fallback
+					content: situs.Deskripsi || 'Deskripsi tidak tersedia', // Deskripsi atau fallback
+					imageSrc: situs.ImageUrl || '/defaultImage.png', // Gambar atau fallback
+					href: `/detailSitus/${situs.Id}` // Link detail menggunakan ID situs
+				}));
+			} else {
+				throw new Error('Data tidak valid atau tidak ada');
+			}
+		} catch (error) {
+			errorMessage = 'Terjadi kesalahan saat mengambil data: ' + error.message;
+		} finally {
+			isLoading = false; // Set status loading selesai
 		}
-	];
-
-	// Filtered situs list based on the search term
-	$: filteredSitusList = situsList.filter((situs) =>
-		situs.title.toLowerCase().includes(searchTerm.toLowerCase())
-	);
+	});
 </script>
 
 <NavBarL />
+
 <section class="p-8 bg-gray-100">
 	<div class="max-w-screen-xl mx-auto">
 		<!-- Header section with title and button -->
@@ -76,16 +55,25 @@
 			/>
 		</div>
 
-		<!-- Display filtered list of historical sites -->
-		<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-			{#each filteredSitusList as situs}
-				<CardBesar
-					title={situs.title}
-					content={situs.content}
-					imageSrc={situs.imageSrc}
-					href={situs.href}
-				/>
-			{/each}
-		</div>
+		<!-- Display loading, error, or situs list -->
+		{#if isLoading}
+			<p>Loading...</p>
+		{:else if errorMessage}
+			<p class="text-red-500">{errorMessage}</p>
+		{:else}
+			<!-- Display filtered list of historical sites -->
+			<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+				{#each situsList.filter((situs) => situs.title
+						.toLowerCase()
+						.includes(searchTerm.toLowerCase())) as situs}
+					<CardBesar
+						title={situs.title}
+						content={situs.content}
+						imageSrc={situs.imageSrc}
+						href={situs.href}
+					/>
+				{/each}
+			</div>
+		{/if}
 	</div>
 </section>

@@ -95,3 +95,18 @@ export async function getOrganisasiDetails() {
 		throw error; // Melemparkan error agar bisa ditangani di tempat lain
 	}
 }
+
+export const getSitus = async () => {
+	try {
+	  const response = await fetch('http://manpro.crossnet.co.id:8080/situs');
+	  if (!response.ok) {
+		throw new Error('Gagal mengambil data situs');
+	  }
+	  const data = await response.json();
+	  return data; // Kembalikan data yang didapat dari API
+	} catch (error) {
+	  console.error('Error:', error);
+	  return { Status: 500, Data: [] }; // Mengembalikan status error dan data kosong
+	}
+  };
+  
