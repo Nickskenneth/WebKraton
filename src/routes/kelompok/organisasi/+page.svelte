@@ -1,4 +1,5 @@
 <script>
+	 //@ts-nocheck
 	import { onMount } from 'svelte';
 	import { getOrganisasi } from '$lib/api'; // Mengambil fungsi dari api.js
 	import CardKecil from '$lib/components/CardKecil.svelte';

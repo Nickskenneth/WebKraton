@@ -1,44 +1,29 @@
+<!-- /acara/acaraSelesai/+page.svelte -->
 <script>
+	 //@ts-nocheck
+	import { onMount } from 'svelte';
+	import { getAcara } from '$lib/api';
 	import CardBesar from '$lib/components/CardBesar.svelte';
 
-	const acaraList = [
-		{
-			title: 'Sesaji Mahesa Lawung',
-			content: 'Sesaji Mahesa Lawung adalah tradisi dalam ritual keagamaan...',
-			imageSrc: '/SesajiMahesaLawung.jpg',
-			href: '/detailAcara'
-		},
-		{
-			title: 'Tinggalan Dalem Jumenengan',
-			content: 'Tinggalan Dalem Jumenengan adalah tradisi...',
-			imageSrc: '/TinggalanDalemJumenengan.jpg',
-			href: '/detailAcara'
-		},
-		{
-			title: 'Garebeg Pasa',
-			content: 'Garebeg Pasa adalah tradisi tahunan...',
-			imageSrc: '/GarebegPasa.jpg',
-			href: '/detailAcara'
-		},
-		{
-			title: 'Kirab Malam 1 Suro',
-			content: 'Kirab malam 1 Suro di Keraton Surakarta berasal...',
-			imageSrc: '/Kirab1Suro.jpg',
-			href: '/detailAcara'
-		}
-	];
+	let acaraList = [];
+
+	onMount(async () => {
+		const response = await getAcara();
+		const currentDate = new Date();
+
+		acaraList = response.Data.filter((acara) => new Date(acara.TanggalAcara) < currentDate);
+	});
 </script>
 
 <section class="bg-gray-100 py-10 px-5">
 	<div class="container mx-auto">
-		<!-- Grid Card -->
 		<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
 			{#each acaraList as acara}
 				<CardBesar
-					title={acara.title}
-					content={acara.content}
-					imageSrc={acara.imageSrc}
-					href={acara.href}
+					title={acara.NamaAcara}
+					content={acara.Deskripsi}
+					imageSrc={acara.foto_acara || '/default-image.jpg'}
+					href={`/acara/detailAcara/${acara.Id}`}
 				/>
 			{/each}
 		</div>

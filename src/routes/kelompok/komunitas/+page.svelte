@@ -1,4 +1,5 @@
 <script>
+	 //@ts-nocheck
 	import { onMount } from 'svelte';
 	import { getKomunitas } from '$lib/api'; // Mengambil fungsi getKomunitas
 	import CardKecil from '$lib/components/CardKecil.svelte'; // Menggunakan CardKecil untuk menampilkan komunitas
