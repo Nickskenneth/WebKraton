@@ -54,7 +54,7 @@ export async function signin(username, password) {
 }
 // api.js
 
-import { fetch } from 'svelte-fetch';
+// import { fetch } from 'svelte-fetch';
 
 export async function signup(username, password) {
 	try {
@@ -75,5 +75,23 @@ export async function signup(username, password) {
 	} catch (error) {
 		console.error(error);
 		return { success: false, message: 'Terjadi kesalahan koneksi' };
+	}
+}
+
+// Fungsi untuk mengambil detail organisasi dari API
+export async function getOrganisasiDetails() {
+	const url = 'http://manpro.crossnet.co.id:8080/detail_organisasi';
+
+	try {
+		const response = await fetch(url);
+		if (!response.ok) {
+			throw new Error('Gagal memuat data organisasi');
+		}
+
+		const data = await response.json();
+		return data; // Mengembalikan data JSON yang diterima dari API
+	} catch (error) {
+		console.error('Error saat mengambil data organisasi:', error);
+		throw error; // Melemparkan error agar bisa ditangani di tempat lain
 	}
 }
