@@ -1,0 +1,48 @@
+{/* <script lang="ts">
+	//@ts-nocheck
+	import { onMount } from 'svelte';
+	import { page } from '$app/stores'; // Menangkap parameter dari URL
+	import { getOrganisasiDetails } from '$lib/api'; // Fungsi untuk mengambil data API
+	import NavBarL from '$lib/components/NavBarL.svelte';
+	import { HttpError_1 } from '@sveltejs/kit';
+
+	let organisasi = {};
+	let isLoading = true;
+	let errorMessage = '';
+	let idOrganisasi = '';
+
+	// Menangkap id dari URL
+	$: idOrganisasi = $page.params.id;
+
+	HttpError_1;
+	// Mengambil data organisasi dari API
+	onMount(async () => {
+		try {
+			const data = await getOrganisasiDetails(idOrganisasi); // Panggil API dengan id organisasi
+
+			if (data.Status === 200 && data.Data) {
+				organisasi = data.Data[0]; // Ambil data organisasi dari response
+			} else {
+				throw new Error('Data organisasi tidak ditemukan');
+			}
+		} catch (error) {
+			errorMessage = 'Terjadi kesalahan: ' + error.message;
+		} finally {
+			isLoading = false;
+		}
+	});
+</script>
+
+<NavBarL />
+
+<section class="p-8 bg-gray-100">
+	{#if isLoading}
+		<p>Loading...</p>
+	{:else if errorMessage}
+		<p class="text-red-500">{errorMessage}</p>
+	{:else}
+		<!-- Tampilan detail organisasi -->
+		<h2>{organisasi.title}</h2>
+		<p>{organisasi.description}</p>
+	{/if}
+</section> */}

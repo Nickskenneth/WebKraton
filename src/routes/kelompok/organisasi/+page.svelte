@@ -1,28 +1,25 @@
 <script>
-	 //@ts-nocheck
+	//@ts-nocheck
 	import { onMount } from 'svelte';
-	import { getOrganisasi } from '$lib/api'; // Mengambil fungsi dari api.js
+	import { getOrganisasi } from '$lib/api'; // Fungsi untuk mengambil data API
 	import CardKecil from '$lib/components/CardKecil.svelte';
 
 	let organisasiList = [];
 	let isLoading = true;
 	let errorMessage = '';
 
-	// Ambil data dari API menggunakan fungsi getOrganisasi
 	onMount(async () => {
 		try {
-			const data = await getOrganisasi(); // Memanggil API
+			const data = await getOrganisasi();
 
-			// Memeriksa apakah Status API adalah 200
 			if (data.Status === 200 && Array.isArray(data.Data)) {
-				// Memetakan data jika Data adalah array
 				organisasiList = data.Data.map((org) => ({
-					title: org.NamaKomunitas || 'Organisasi Tanpa Nama', // NamaKomunitas atau fallback
-					imageSrc: '/defaultImage.png', // Gambar placeholder
-					href: `/detailOrganisasi/${org.Id}` // ID digunakan untuk link ke detail
+					title: org.NamaOrganisasi || 'Organisasi Tanpa Nama',
+					imageSrc: org.FotoOrganisasi || '/defaultImage.png', // Placeholder jika FotoOrganisasi kosong
+					href: `/kelompok/organisasi/${org.IdOrganisasi}` // Gunakan IdOrganisasi untuk tautan detail
 				}));
 			} else {
-				throw new Error('Data tidak valid atau tidak ada');
+				throw new Error('Data tidak valid atau kosong');
 			}
 		} catch (error) {
 			errorMessage = 'Terjadi kesalahan saat mengambil data: ' + error.message;
@@ -34,7 +31,6 @@
 
 <section class="bg-gray-100 py-10 px-5">
 	<div class="container mx-auto">
-		<!-- Grid Card -->
 		{#if isLoading}
 			<p>Loading...</p>
 		{:else if errorMessage}
