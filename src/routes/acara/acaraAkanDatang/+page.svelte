@@ -1,31 +1,39 @@
-<!-- /acara/acaraAkanDatang/+page.svelte -->
 <script>
-	 //@ts-nocheck
+	//@ts-nocheck
 	import { onMount } from 'svelte';
-	import { getAcara } from '$lib/api'; // Mengambil data acara
+	import { getAcara } from '$lib/api';
 	import CardBesar from '$lib/components/CardBesar.svelte';
 
 	let acaraList = [];
 
 	onMount(async () => {
-		const response = await getAcara();
-		const currentDate = new Date();
+		try {
+			const response = await getAcara();
+			const currentDate = new Date();
 
-		acaraList = response.Data.filter((acara) => new Date(acara.TanggalAcara) >= currentDate);
+			// Filter acara yang akan datang menggunakan TanggalMulai
+			acaraList = response.Data.filter((acara) => new Date(acara.TanggalMulai) >= currentDate);
+		} catch (error) {
+			console.error('Error saat memuat data acara akan datang:', error);
+		}
 	});
 </script>
 
 <section class="bg-gray-100 py-10 px-5">
 	<div class="container mx-auto">
-		<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-			{#each acaraList as acara}
-				<CardBesar
-					title={acara.NamaAcara}
-					content={acara.Deskripsi}
-					imageSrc={acara.foto_acara || '/default-image.jpg'}
-					href={`/acara/detailAcara/${acara.Id}`}
-				/>
-			{/each}
-		</div>
+		{#if acaraList.length === 0}
+			<p class="text-center text-gray-500">Tidak ada acara akan datang.</p>
+		{:else}
+			<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+				{#each acaraList as acara}
+					<CardBesar
+						title={acara.NamaAcara}
+						content={acara.Deskripsi}
+						imageSrc={acara.FotoAcara || '/default-image.jpg'}
+						href={`/acara/detailAcara/${acara.Id}`}
+					/>
+				{/each}
+			</div>
+		{/if}
 	</div>
 </section>
