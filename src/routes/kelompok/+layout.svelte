@@ -11,8 +11,10 @@
 
 	// Periksa apakah rute saat ini adalah halaman detail
 	$: isDetailPage =
-		$page.url.pathname.startsWith('/kelompok/organisasi/') &&
-		$page.url.pathname !== '/kelompok/organisasi';
+		($page.url.pathname.startsWith('/kelompok/organisasi/') &&
+			$page.url.pathname !== '/kelompok/organisasi') ||
+		($page.url.pathname.startsWith('/kelompok/komunitas/') &&
+			$page.url.pathname !== '/kelompok/komunitas');
 </script>
 
 <main>

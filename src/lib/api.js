@@ -1,17 +1,17 @@
 //@ts-nocheck
 
-export async function getKomunitas() {
-	try {
-		const response = await fetch('http://manpro.crossnet.co.id:8800/komunitas');
-		if (!response.ok) {
-			throw new Error('Network response was not ok');
-		}
-		return await response.json();
-	} catch (error) {
-		console.error('Error fetching komunitas:', error);
-		throw error;
-	}
-}
+// export async function getKomunitas() {
+// 	try {
+// 		const response = await fetch('http://manpro.crossnet.co.id:8800/komunitas');
+// 		if (!response.ok) {
+// 			throw new Error('Network response was not ok');
+// 		}
+// 		return await response.json();
+// 	} catch (error) {
+// 		console.error('Error fetching komunitas:', error);
+// 		throw error;
+// 	}
+// }
 
 // Fungsi untuk login
 export async function signin(username, password) {
@@ -120,6 +120,36 @@ export async function getOrganisasiDetails(id) {
 	try {
 		const response = await fetch(
 			`http://manpro.crossnet.co.id:8800/detail_organisasi?id_organisasi=${id}`
+		);
+		if (!response.ok) {
+			throw new Error('Gagal mendapatkan data');
+		}
+		const data = await response.json();
+		console.log('Respons API Detail:', data); // Tambahkan log
+		return data;
+	} catch (error) {
+		console.error('Error fetching detail organisasi:', error);
+		throw error;
+	}
+}
+
+// KOMUNITAS
+export async function getKomunitas() {
+	try {
+		const response = await fetch('http://manpro.crossnet.co.id:8800/komunitas');
+		const data = await response.json();
+		return data;
+	} catch (error) {
+		console.error('Error fetching organisasi data:', error);
+		return { Status: 500, Data: [] };
+	}
+}
+
+// DETAIL KOMUNITAS
+export async function getKomunitasDetails(id) {
+	try {
+		const response = await fetch(
+			`http://manpro.crossnet.co.id:8800/detail_komunitas?id_komunitas=${id}`
 		);
 		if (!response.ok) {
 			throw new Error('Gagal mendapatkan data');
