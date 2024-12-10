@@ -1,11 +1,12 @@
 <script>
 	//@ts-nocheck
 	import { onMount } from 'svelte';
-	import { getAcara } from '$lib/api';
+	import { getAcara } from '$lib/api'; // Fungsi API untuk mengambil data acara
 	import CardBesar from '$lib/components/CardBesar.svelte';
 
 	let acaraList = [];
 
+	// Ambil data acara selesai
 	onMount(async () => {
 		try {
 			const response = await getAcara();
@@ -30,7 +31,7 @@
 						title={acara.NamaAcara}
 						content={acara.Deskripsi}
 						imageSrc={acara.FotoAcara || '/default-image.jpg'}
-						href={`/acara/detailAcara/${acara.Id}`}
+						href={`/acara/acaraSelesai/${acara.Id}`} 
 					/>
 				{/each}
 			</div>

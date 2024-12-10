@@ -81,6 +81,7 @@ export const getSitus = async () => {
 	}
 };
 
+// ACARA
 export async function getAcara() {
 	try {
 		const response = await fetch('http://manpro.crossnet.co.id:8800/acara', {
@@ -100,6 +101,20 @@ export async function getAcara() {
 	} catch (error) {
 		console.error('Error saat mengambil data: ' + error.message);
 		return { Status: 500, Message: 'Gagal mengambil data' }; // Return error jika gagal
+	}
+}
+
+// DETAIL ACARA
+export async function getAcaraDetails(id) {
+	try {
+		const response = await fetch(`http://manpro.crossnet.co.id:8800/detail_acara?id_acara=${id}`);
+		if (!response.ok) {
+			throw new Error('Gagal mendapatkan detail acara.');
+		}
+		return await response.json();
+	} catch (error) {
+		console.error('Error:', error);
+		throw error;
 	}
 }
 
