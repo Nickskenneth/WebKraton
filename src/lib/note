@@ -1,48 +1,235 @@
-{/* <script lang="ts">
-	//@ts-nocheck
-	import { onMount } from 'svelte';
-	import { page } from '$app/stores'; // Menangkap parameter dari URL
-	import { getOrganisasiDetails } from '$lib/api'; // Fungsi untuk mengambil data API
-	import NavBarL from '$lib/components/NavBarL.svelte';
-	import { HttpError_1 } from '@sveltejs/kit';
+// <script>
+// 	//@ts-nocheck
+// 	import { signup } from '$lib/api';
 
-	let organisasi = {};
-	let isLoading = true;
-	let errorMessage = '';
-	let idOrganisasi = '';
+// 	let step = 1; // Untuk melacak tahap
+// 	let formData = {
+// 		username: '',
+// 		password: '',
+// 		asma_timur: '',
+// 		asma_dalem: '',
+// 		wongso: '',
+// 		ttl: '',
+// 		jenis_kelamin: '',
+// 		domisili: '',
+// 		email: '',
+// 		no_telp: '',
+// 		nama_ayah: '',
+// 		nama_ibu: ''
+// 	};
 
-	// Menangkap id dari URL
-	$: idOrganisasi = $page.params.id;
+// 	let isLoading = false;
+// 	let successMessage = '';
+// 	let errorMessage = '';
 
-	HttpError_1;
-	// Mengambil data organisasi dari API
-	onMount(async () => {
-		try {
-			const data = await getOrganisasiDetails(idOrganisasi); // Panggil API dengan id organisasi
+// 	// Fungsi untuk melanjutkan ke tahap berikutnya
+// 	function nextStep() {
+// 		if (step === 1) {
+// 			if (!formData.username || !formData.password) {
+// 				errorMessage = 'Username dan Password harus diisi.';
+// 				return;
+// 			}
+// 			step = 2; // Pindah ke tahap kedua
+// 			errorMessage = '';
+// 		}
+// 	}
 
-			if (data.Status === 200 && data.Data) {
-				organisasi = data.Data[0]; // Ambil data organisasi dari response
-			} else {
-				throw new Error('Data organisasi tidak ditemukan');
-			}
-		} catch (error) {
-			errorMessage = 'Terjadi kesalahan: ' + error.message;
-		} finally {
-			isLoading = false;
-		}
-	});
-</script>
+// 	// Fungsi untuk mengirim data pendaftaran
+// 	async function handleSignup() {
+// 		isLoading = true;
+// 		successMessage = '';
+// 		errorMessage = '';
 
-<NavBarL />
+// 		try {
+// 			// Panggil API signup
+// 			const response = await signup(formData);
+// 			if (response.Status === 200) {
+// 				successMessage = 'Pendaftaran berhasil! Silakan login.';
+// 				resetForm();
+// 			} else {
+// 				errorMessage = response.Message || 'Terjadi kesalahan saat mendaftar.';
+// 			}
+// 		} catch (error) {
+// 			errorMessage = 'Terjadi kesalahan: ' + error.message;
+// 			console.error(error);
+// 		} finally {
+// 			isLoading = false;
+// 		}
+// 	}
 
-<section class="p-8 bg-gray-100">
-	{#if isLoading}
-		<p>Loading...</p>
-	{:else if errorMessage}
-		<p class="text-red-500">{errorMessage}</p>
-	{:else}
-		<!-- Tampilan detail organisasi -->
-		<h2>{organisasi.title}</h2>
-		<p>{organisasi.description}</p>
-	{/if}
-</section> */}
+// 	// Reset form setelah sukses
+// 	function resetForm() {
+// 		formData = {
+// 			username: '',
+// 			password: '',
+// 			asma_timur: '',
+// 			asma_dalem: '',
+// 			wongso: '',
+// 			ttl: '',
+// 			jenis_kelamin: '',
+// 			domisili: '',
+// 			email: '',
+// 			no_telp: '',
+// 			nama_ayah: '',
+// 			nama_ibu: ''
+// 		};
+// 		step = 1;
+// 	}
+// </script>
+
+// <div class="signup-container">
+// 	<div class="form-box">
+// 		<img src="/logoKraton.png" alt="Logo Keraton" class="logo" />
+// 		<h2 class="form-title">Signup</h2>
+
+// 		<!-- Pesan sukses dan error -->
+// 		{#if successMessage}
+// 			<p class="success-message">{successMessage}</p>
+// 		{/if}
+// 		{#if errorMessage}
+// 			<p class="error-message">{errorMessage}</p>
+// 		{/if}
+
+// 		<!-- Tahap 1 -->
+// 		{#if step === 1}
+// 			<form on:submit|preventDefault={nextStep} class="form">
+// 				<input
+// 					type="text"
+// 					placeholder="Username"
+// 					bind:value={formData.username}
+// 					required
+// 					class="input"
+// 				/>
+// 				<input
+// 					type="password"
+// 					placeholder="Password"
+// 					bind:value={formData.password}
+// 					required
+// 					class="input"
+// 				/>
+// 				<button type="submit" class="btn">Lanjut</button>
+// 			</form>
+// 		{/if}
+
+// 		<!-- Tahap 2 -->
+// 		{#if step === 2}
+// 			<form on:submit|preventDefault={handleSignup} class="form">
+// 				<input
+// 					type="text"
+// 					placeholder="Asma Timur"
+// 					bind:value={formData.asma_timur}
+// 					class="input"
+// 					required
+// 				/>
+// 				<input
+// 					type="text"
+// 					placeholder="Asma Dalem"
+// 					bind:value={formData.asma_dalem}
+// 					class="input"
+// 				/>
+// 				<input type="text" placeholder="Wongso" bind:value={formData.wongso} class="input" />
+// 				<input
+// 					type="date"
+// 					placeholder="Tanggal Lahir"
+// 					bind:value={formData.ttl}
+// 					class="input"
+// 					required
+// 				/>
+// 				<select bind:value={formData.jenis_kelamin} required class="input">
+// 					<option value="" disabled selected>Pilih Jenis Kelamin</option>
+// 					<option value="Laki-laki">Laki-laki</option>
+// 					<option value="Perempuan">Perempuan</option>
+// 				</select>
+// 				<input
+// 					type="text"
+// 					placeholder="Domisili"
+// 					bind:value={formData.domisili}
+// 					class="input"
+// 					required
+// 				/>
+// 				<input
+// 					type="email"
+// 					placeholder="Email"
+// 					bind:value={formData.email}
+// 					class="input"
+// 					required
+// 				/>
+// 				<input
+// 					type="tel"
+// 					placeholder="No Telepon"
+// 					bind:value={formData.no_telp}
+// 					class="input"
+// 					required
+// 				/>
+// 				<input type="text" placeholder="Nama Ayah" bind:value={formData.nama_ayah} class="input" />
+// 				<input type="text" placeholder="Nama Ibu" bind:value={formData.nama_ibu} class="input" />
+// 				<button type="submit" class="btn" disabled={isLoading}>
+// 					{isLoading ? 'Loading...' : 'Daftar'}
+// 				</button>
+// 			</form>
+// 		{/if}
+// 	</div>
+// </div>
+
+// <style>
+// 	.signup-container {
+// 		display: flex;
+// 		justify-content: center;
+// 		align-items: center;
+// 		min-height: 100vh;
+// 		background-image: url('/KeratonSoloBG.jpg'); /* Ganti dengan path gambar Anda */
+// 		background-size: cover;
+// 		background-position: center;
+// 	}
+
+// 	.form-box {
+// 		background: rgba(255, 255, 255, 0.9);
+// 		padding: 30px;
+// 		border-radius: 10px;
+// 		box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+// 		width: 100%;
+// 		max-width: 400px;
+// 		text-align: center;
+// 	}
+
+// 	.logo {
+// 		width: 100px;
+// 		margin: 0 auto 20px;
+// 	}
+
+// 	.form-title {
+// 		font-size: 24px;
+// 		color: #333;
+// 		margin-bottom: 20px;
+// 	}
+
+// 	.input {
+// 		width: 100%;
+// 		border: 1px solid #ccc;
+// 		border-radius: 5px;
+// 		padding: 10px 15px;
+// 		margin-bottom: 15px;
+// 		font-size: 16px;
+// 	}
+
+// 	.btn {
+// 		width: 100%;
+// 		padding: 10px 0;
+// 		background-color: #004da3;
+// 		color: white;
+// 		font-weight: bold;
+// 		border-radius: 5px;
+// 		cursor: pointer;
+// 		text-align: center;
+// 	}
+
+// 	.success-message {
+// 		color: green;
+// 		margin-bottom: 10px;
+// 	}
+
+// 	.error-message {
+// 		color: red;
+// 		margin-bottom: 10px;
+// 	}
+// </style>

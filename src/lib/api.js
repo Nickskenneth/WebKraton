@@ -1,5 +1,51 @@
 //@ts-nocheck
 
+// SIGNUP
+// export async function signup(data) {
+// 	try {
+// 		const response = await fetch('http://manpro.crossnet.co.id:8800/signup', {
+// 			method: 'POST',
+// 			headers: {
+// 				'Content-Type': 'application/json'
+// 			},
+// 			body: JSON.stringify(data)
+// 		});
+
+// 		const result = await response.json();
+// 		return result;
+// 	} catch (error) {
+// 		console.error('Error during signup:', error);
+// 		throw error;
+// 	}
+// }
+
+export async function signup(formData) {
+	try {
+		// Kirim data ke API menggunakan POST
+		const response = await fetch('http://manpro.crossnet.co.id:8800/signup', {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json'
+			},
+			body: JSON.stringify(formData) // Mengirim data form
+		});
+
+		// Pastikan respons diterima dengan baik
+		if (!response.ok) {
+			throw new Error(`HTTP error! Status: ${response.status}`);
+		}
+
+		const data = await response.json(); // Parse JSON dari response
+		return data; // Mengembalikan data JSON
+	} catch (error) {
+		console.error('Error during signup:', error);
+		return {
+			Status: 500,
+			Message: 'Terjadi kesalahan saat terhubung ke .....'
+		}; // Return error untuk menangani kegagalan API
+	}
+}
+
 // Fungsi untuk login
 export async function signin(username, password) {
 	try {
@@ -29,27 +75,27 @@ export async function signin(username, password) {
 	}
 }
 
-export async function signup(username, password) {
-	try {
-		const response = await fetch('http://manpro.crossnet.co.id:8800/signup', {
-			method: 'POST',
-			headers: {
-				'Content-Type': 'application/json'
-			},
-			body: JSON.stringify({ username, password })
-		});
-		const data = await response.json();
+// export async function signup(username, password) {
+// 	try {
+// 		const response = await fetch('http://manpro.crossnet.co.id:8800/signup', {
+// 			method: 'POST',
+// 			headers: {
+// 				'Content-Type': 'application/json'
+// 			},
+// 			body: JSON.stringify({ username, password })
+// 		});
+// 		const data = await response.json();
 
-		if (data.success) {
-			return { success: true, message: 'Pendaftaran berhasil!' };
-		} else {
-			return { success: false, message: data.message || 'Terjadi kesalahan' };
-		}
-	} catch (error) {
-		console.error(error);
-		return { success: false, message: 'Terjadi kesalahan koneksi' };
-	}
-}
+// 		if (data.success) {
+// 			return { success: true, message: 'Pendaftaran berhasil!' };
+// 		} else {
+// 			return { success: false, message: data.message || 'Terjadi kesalahan' };
+// 		}
+// 	} catch (error) {
+// 		console.error(error);
+// 		return { success: false, message: 'Terjadi kesalahan koneksi' };
+// 	}
+// }
 
 // SITUS
 export const getSitus = async () => {
