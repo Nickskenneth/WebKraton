@@ -1,18 +1,5 @@
 //@ts-nocheck
 
-// export async function getKomunitas() {
-// 	try {
-// 		const response = await fetch('http://manpro.crossnet.co.id:8800/komunitas');
-// 		if (!response.ok) {
-// 			throw new Error('Network response was not ok');
-// 		}
-// 		return await response.json();
-// 	} catch (error) {
-// 		console.error('Error fetching komunitas:', error);
-// 		throw error;
-// 	}
-// }
-
 // Fungsi untuk login
 export async function signin(username, password) {
 	try {
@@ -41,9 +28,6 @@ export async function signin(username, password) {
 		return { success: false, message: error.message || 'Terjadi kesalahan, coba lagi.' };
 	}
 }
-// api.js
-
-// import { fetch } from 'svelte-fetch';
 
 export async function signup(username, password) {
 	try {
@@ -67,6 +51,7 @@ export async function signup(username, password) {
 	}
 }
 
+// SITUS
 export const getSitus = async () => {
 	try {
 		const response = await fetch('http://manpro.crossnet.co.id:8800/situs');
@@ -80,6 +65,23 @@ export const getSitus = async () => {
 		return { Status: 500, Data: [] }; // Mengembalikan status error dan data kosong
 	}
 };
+
+// DETAIL SITUS
+export async function getSitusDetails(id) {
+	try {
+		const response = await fetch(
+			`http://manpro.crossnet.co.id:8800/situs?id_situs=${id}` // Endpoint API
+		);
+		if (!response.ok) {
+			throw new Error('Gagal mendapatkan detail situs.');
+		}
+		const data = await response.json();
+		return data; // Mengembalikan data situs
+	} catch (error) {
+		console.error('Error:', error);
+		throw error; // Lemparkan error jika terjadi
+	}
+}
 
 // ACARA
 export async function getAcara() {
@@ -174,6 +176,23 @@ export async function getKomunitasDetails(id) {
 		return data;
 	} catch (error) {
 		console.error('Error fetching detail organisasi:', error);
+		throw error;
+	}
+}
+
+// CARI ABDI
+export async function getAbdiDetails(id) {
+	try {
+		const response = await fetch(
+			`http://manpro.crossnet.co.id:8800/user?id_user=${id}` // Sesuaikan endpoint
+		);
+		if (!response.ok) {
+			throw new Error('Gagal mendapatkan detail Abdi.');
+		}
+		const data = await response.json();
+		return data;
+	} catch (error) {
+		console.error('Error:', error);
 		throw error;
 	}
 }

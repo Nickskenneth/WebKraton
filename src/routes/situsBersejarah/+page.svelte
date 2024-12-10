@@ -23,7 +23,7 @@
 					title: situs.Nama || 'Situs Tanpa Nama', // NamaSitus atau fallback
 					content: situs.Deskripsi || 'Deskripsi tidak tersedia', // Deskripsi atau fallback
 					imageSrc: situs.ImageUrl || '/defaultImage.png', // Gambar atau fallback
-					href: `/detailSitus/${situs.Id}` // Link detail menggunakan ID situs
+					href: `/situsBersejarah/${situs.Id}` // Link detail menggunakan ID situs
 				}));
 			} else {
 				throw new Error('Data tidak valid atau tidak ada');
