@@ -41,7 +41,7 @@ export async function signup(formData) {
 		console.error('Error during signup:', error);
 		return {
 			Status: 500,
-			Message: 'Terjadi kesalahan saat terhubung ke .....'
+			Message: 'Terjadi kesalahan saat terhubung ke server'
 		}; // Return error untuk menangani kegagalan API
 	}
 }
@@ -75,28 +75,6 @@ export async function signin(username, password) {
 	}
 }
 
-// export async function signup(username, password) {
-// 	try {
-// 		const response = await fetch('http://manpro.crossnet.co.id:8800/signup', {
-// 			method: 'POST',
-// 			headers: {
-// 				'Content-Type': 'application/json'
-// 			},
-// 			body: JSON.stringify({ username, password })
-// 		});
-// 		const data = await response.json();
-
-// 		if (data.success) {
-// 			return { success: true, message: 'Pendaftaran berhasil!' };
-// 		} else {
-// 			return { success: false, message: data.message || 'Terjadi kesalahan' };
-// 		}
-// 	} catch (error) {
-// 		console.error(error);
-// 		return { success: false, message: 'Terjadi kesalahan koneksi' };
-// 	}
-// }
-
 // SITUS
 export const getSitus = async () => {
 	try {
@@ -116,7 +94,7 @@ export const getSitus = async () => {
 export async function getSitusDetails(id) {
 	try {
 		const response = await fetch(
-			`http://manpro.crossnet.co.id:8800/situs?id_situs=${id}` // Endpoint API
+			`http://manpro.crossnet.co.id:8800/detail_situs?id_situs=${id}` // Endpoint API
 		);
 		if (!response.ok) {
 			throw new Error('Gagal mendapatkan detail situs.');

@@ -37,7 +37,6 @@
 				</button>
 			</div>
 		</div>
-
 		<!-- Slot untuk Konten -->
 		<slot />
 	</div>
